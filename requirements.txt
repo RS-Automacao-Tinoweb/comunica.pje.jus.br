@@ -1,0 +1,19 @@
+# Dependências do projeto
+# Para instalar: pip install -r requirements.txt
+
+# Web Scraping - Método 1: curl_cffi (sem JavaScript)
+curl-cffi>=0.13.0
+beautifulsoup4>=4.14.0
+
+# Web Scraping - Método 2: Selenium (com JavaScript - RECOMENDADO)
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+
+# APIs do Google (YouTube, etc) - Descomente se necessário
+# google-auth==2.23.0
+# google-auth-oauthlib==1.1.0
+# google-auth-httplib2==0.1.1
+# google-api-python-client==2.100.0
+
+# Utilitários
+# python-dotenv==1.0.0

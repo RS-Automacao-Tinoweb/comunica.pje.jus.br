@@ -1,0 +1,32 @@
+# Ambiente Virtual
+venv/
+env/
+ENV/
+.venv/
+
+# Arquivos Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Credenciais e tokens
+token.pickle
+credentials.json
+.env
+*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
