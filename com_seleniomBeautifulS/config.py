@@ -8,6 +8,17 @@ Ajuste estes valores conforme necessário
 # URL base da consulta (edite os parâmetros de data e texto aqui)
 BASE_URL = "https://comunica.pje.jus.br/consulta?texto=distribu%C3%ADdo&dataDisponibilizacaoInicio=2025-11-01&dataDisponibilizacaoFim=2025-11-10"
 
+# ===== CONFIGURAÇÕES MULTI-TRIBUNAL =====
+
+# Tipo de tribunais para processar: "TJ", "TRF" ou "TODOS"
+TIPO_TRIBUNAL = "TODOS"
+
+# Diretório onde salvar resultados por tribunal
+OUTPUT_DIR_TRIBUNAL = "resultados_por_tribunal"
+
+# Delay entre processamento de tribunais (segundos)
+DELAY_BETWEEN_TRIBUNAIS = 2
+
 # ===== CONFIGURAÇÕES DE PAGINAÇÃO =====
 
 # Máximo de páginas para processar (segurança contra loops infinitos)
@@ -19,21 +30,21 @@ MAX_CONSECUTIVE_EMPTY = 3
 # ===== CONFIGURAÇÕES DE TIMING =====
 
 # Tempo de espera entre navegação de páginas (segundos)
-DELAY_BETWEEN_PAGES = 3
+DELAY_BETWEEN_PAGES = 1
 
 # Tempo para aguardar lazy loading de novas páginas (segundos)
 # Aumente este valor se o site estiver carregando devagar
-DELAY_WAIT_LOAD = 5
+DELAY_WAIT_LOAD = 3
 
 # Intervalo para aguardar lazy loading (a cada X páginas)
 # Ex: Se LAZY_LOAD_INTERVAL = 5, aguarda a cada 5 páginas (6, 11, 16, 21...)
 LAZY_LOAD_INTERVAL = 5
 
 # Pequeno delay entre páginas (segundos)
-DELAY_MICRO = 0.5
+DELAY_MICRO = 0.2
 
 # Timeout para aguardar elementos carregarem (segundos)
-WAIT_TIMEOUT = 15
+WAIT_TIMEOUT = 8
 
 # Tempo inicial de espera após carregar a primeira página (segundos)
 INITIAL_LOAD_WAIT = 3

@@ -1,11 +1,14 @@
 # Dependências do projeto
 # Para instalar: pip install -r requirements.txt
 
-# Web Scraping - Método 1: curl_cffi (sem JavaScript)
+# Web Scraping - Método 1: API Direta (MAIS RÁPIDO E RECOMENDADO!)
+requests>=2.31.0
+
+# Web Scraping - Método 2: curl_cffi (sem JavaScript)
 curl-cffi>=0.13.0
 beautifulsoup4>=4.14.0
 
-# Web Scraping - Método 2: Selenium (com JavaScript - RECOMENDADO)
+# Web Scraping - Método 3: Selenium (com JavaScript)
 selenium>=4.15.0
 webdriver-manager>=4.0.0
 
