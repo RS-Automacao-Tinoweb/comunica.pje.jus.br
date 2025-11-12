@@ -12,6 +12,9 @@ Scraper de alto desempenho para API do PJE (Processo Judicial Eletrônico) utili
 - **✅ Timeout Multi-Nível**: Por requisição e por goroutine
 - **✅ Progress em Tempo Real**: Atualiza a cada 500ms
 - **✅ Filtros Client-Side**: Filtra tipoComunicacao e codigoClasse localmente
+- **✅ Mapeamento Correto da API**: Todos os campos preenchidos (processo, tribunal, classe, etc)
+- **✅ Extração de Data de Despacho**: Automática do campo texto
+- **✅ Interface Web de Filtros**: Processamento visual e interativo do cache
 
 ## 📁 Estrutura Modular
 
@@ -90,6 +93,27 @@ go build -o scraper_pje.exe
 
 ## 📊 Exemplos de Uso
 
+### 🚀 Modo Facilitado (RECOMENDADO)
+
+Use o script `extrair.ps1` para executar com todos os 30 tribunais facilmente:
+
+```powershell
+# Todos os tribunais (modo normal)
+.\extrair.ps1 -Inicio "01/11/2025" -Fim "10/11/2025"
+
+# Modo conservador (evita erro 429)
+.\extrair.ps1 -Inicio "01/11/2025" -Fim "30/11/2025" -Modo conservador
+
+# Tribunais específicos
+.\extrair.ps1 -Inicio "01/11/2025" -Fim "10/11/2025" -Tribunais "TJSP,TJAM,TJBA"
+```
+
+📖 **Ver guia completo:** [GUIA_RAPIDO.md](GUIA_RAPIDO.md)
+
+---
+
+### 🔧 Modo Manual (Go direto)
+
 ### Básico (1 tribunal)
 ```powershell
 go run . --tribunais TJSP --inicio 2025-11-06 --fim 2025-11-10
@@ -97,22 +121,22 @@ go run . --tribunais TJSP --inicio 2025-11-06 --fim 2025-11-10
 
 ### Múltiplos Tribunais
 ```powershell
-go run . --tribunais "TJSP,TJAM,TJBA" --wp 5 --rps 5
+go run . --tribunais "TJSP,TJAM,TJBA" --inicio 2025-11-06 --fim 2025-11-10 --wp 5 --rps 5
 ```
 
 ### Modo Conservador (evitar 429)
 ```powershell
-go run . --tribunais TJSP --wp 2 --rps 2
+go run . --tribunais TJSP --inicio 2025-11-06 --fim 2025-11-10 --wp 2 --rps 2
 ```
 
 ### Modo Agressivo (servidor robusto)
 ```powershell
-go run . --tribunais TJSP --wp 10 --rps 10
+go run . --tribunais TJSP --inicio 2025-11-06 --fim 2025-11-10 --wp 10 --rps 10
 ```
 
 ### Sem Cache
 ```powershell
-go run . --tribunais TJSP --cache=false
+go run . --tribunais TJSP --inicio 2025-11-06 --fim 2025-11-10 --cache=false
 ```
 
 ## 🔍 Logs e Debug
@@ -213,12 +237,49 @@ Após 30s sem 429, aumenta gradualmente:
 [rate_limiter] Taxa aumentada para 2.30 req/s
 ```
 
+## 🔍 Interface Web de Filtros
+
+### 🎨 Processar e Filtrar Cache Visualmente
+
+Após extrair dados, use a **Interface Web** para processar e filtrar o cache com múltiplos critérios:
+
+```powershell
+# Iniciar interface
+cd filtros
+go run main.go
+
+# Ou usar script
+.\scripts\iniciar_interface_filtros.ps1
+```
+
+Acesse: **http://localhost:8080**
+
+### Recursos da Interface:
+- ✅ **Seleção visual de cache**: Lista todos os caches disponíveis
+- ✅ **Filtros múltiplos**: Tribunal, Tipo, Classe, Data, Texto
+- ✅ **Extração de data de despacho**: Automática do campo texto
+- ✅ **Salvamento automático**: Gera JSON em `dados_filtrados/`
+- ✅ **Estatísticas em tempo real**: Total processado, filtrado, valor (R$)
+- ✅ **Design moderno**: Interface responsiva e intuitiva
+
+### Exemplo de Uso:
+1. Execute o scraper: `go run . --tribunais TJSP --cache=true`
+2. Inicie a interface: `cd filtros && go run main.go`
+3. Selecione o cache: `cache/TJSP_2025-11-12_11-44-10`
+4. Configure filtros (tribunal, tipo, data, etc)
+5. Clique em "Processar e Filtrar Dados"
+6. Resultado salvo em: `dados_filtrados/filtrado_2025-11-12_14-30-00.json`
+
+**📖 Documentação completa:** `filtros/README.md`
+
 ## 🎯 Próximos Passos
 
 Para otimizar ainda mais:
 1. Aumentar `--wp` gradualmente (5 → 10 → 20)
 2. Aumentar `--rps` gradualmente (3 → 5 → 10)
 3. Monitorar logs e ajustar conforme 429s apareçam
+4. Usar interface web para filtrar dados extraídos
+5. Automatizar com scripts PowerShell em `scripts/`
 
 ---
 
